@@ -5,6 +5,7 @@ class Node:
         self.data = data
         self.right = right
         self.left = left
+        self.id = id(self)
         
 
 def serialize( root):
@@ -15,7 +16,7 @@ def serialize( root):
             ret[0] += str(root.data)+';'
                 
         else:
-            ret[0] += '#;'           
+            ret[0] += '0;'           
 
     ret = ['']
     post_order(root)
@@ -26,7 +27,7 @@ def deserialize(data):
         return 
     nodes = data.split(';')  
     def post_order(nodes):
-        if nodes[-1] == '#':
+        if nodes[-1] == '0':
             nodes.pop()
             return None
         node = nodes.pop()
@@ -48,7 +49,7 @@ class TreeNode:
 def generate_random_tree(depth):
     if depth == 0 or random.random() < 0.2:
         return None
-    root = TreeNode(random.randint(1, 100))
+    root = TreeNode(random.randint(1, 99))
     root.left = generate_random_tree(depth - 1)
     root.right = generate_random_tree(depth - 1)
     return root
@@ -66,6 +67,10 @@ if __name__=="__main__":
         tree = generate_random_tree(4)  # You can adjust the depth as needed
         print(f"\nRandom Tree {i}:\n")
         #print_tree(tree)
-        print(serialize(tree))
-        lista = serialize(tree).split(';')
+        serial = serialize(tree) 
+        print(serial)
+        lista = serial.split(';')
         print("list", lista)
+        file = open("trees/arbol" + str(i) + ".dat", "w")
+        file.write(serial)
+        file.close() 

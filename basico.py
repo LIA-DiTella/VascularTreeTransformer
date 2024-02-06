@@ -4,6 +4,7 @@ import torch.optim as optim
 import matplotlib.pyplot as plt
 import torch.nn.functional as F
 import numpy as np
+from generateTrees import generate_random_tree, serialize
 
 # Define the Transformer model
 class DecoderOnlyTransformer(nn.Module):
@@ -52,8 +53,13 @@ def generate_sequence(model, start_token, stop_token, max_length=10):
 
     
 # Create a dummy dataset
-vocab_size = 50  # Example vocabulary size
-seq_length = 5
+def read_tree(filename, dir):
+    #with open('./prof6/' +filename, "r") as f:
+    #with open('./trees/' +filename, "r") as f:
+    #with open('./' +dir +'/' +filename, "r") as f:
+    with open(dir +'/' +filename, "r") as f:
+        byte = f.read() 
+        return byteseq_length = 5
 num_sequences = 100 
 batch_size = 5
 
