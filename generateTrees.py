@@ -60,11 +60,12 @@ def print_tree(root, level=0, prefix="Root: "):
             print_tree(root.left, level + 1, "L--- ")
             print_tree(root.right, level + 1, "R--- ")
 
-# Generate and print 10 random trees
-for i in range(1, 11):
-    tree = generate_random_tree(4)  # You can adjust the depth as needed
-    print(f"\nRandom Tree {i}:\n")
-    #print_tree(tree)
-    print(serialize(tree))
-    l = list(serialize(tree))
-    print("list", [a for a in l if a != ";"])
+# Generate and print 10 random tree
+if __name__=="__main__":
+    for i in range(1, 11):
+        tree = generate_random_tree(4)  # You can adjust the depth as needed
+        print(f"\nRandom Tree {i}:\n")
+        #print_tree(tree)
+        print(serialize(tree))
+        lista = serialize(tree).split(';')
+        print("list", lista)
