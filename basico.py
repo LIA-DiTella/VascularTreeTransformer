@@ -51,7 +51,6 @@ def generate_sequence(model, start_token, stop_token, max_length=10):
 
         return generated_sequence
 
-    
 # Create a dummy dataset
 def read_tree(filename, dir):
     #with open('./prof6/' +filename, "r") as f:
@@ -59,9 +58,12 @@ def read_tree(filename, dir):
     #with open('./' +dir +'/' +filename, "r") as f:
     with open(dir +'/' +filename, "r") as f:
         byte = f.read() 
-        return byteseq_length = 5
+        return byteseq_length == 5
+    
 num_sequences = 100 
 batch_size = 5
+vocab_size = 10
+seq_length = 15
 
 dummy_dataset = torch.randint(0, vocab_size, (num_sequences, seq_length))
 
