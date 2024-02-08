@@ -16,7 +16,8 @@ class DecoderOnlyTransformer(nn.Module):
         self.fc = nn.Linear(d_model, vocab_size)
 
     def forward(self, x):
-        #print("shape x", x.shape)
+        print("x", x)
+        print("shape x", x.shape)
         x = self.embedding(x)
         #print("embedding", x.shape)
         memory = torch.zeros_like(x)
@@ -59,10 +60,12 @@ def read_tree(filename, dir):
     #with open('./' +dir +'/' +filename, "r") as f:
     with open(dir +'/' +filename, "r") as f:
         byte = f.read() 
-        return byteseq_length = 5
-num_sequences = 100 
-batch_size = 5
+        return byte
 
+seq_length = 5
+num_sequences = 100 
+batch_size = 1
+vocab_size = 50
 dummy_dataset = torch.randint(0, vocab_size, (num_sequences, seq_length))
 
 #print("dataset", dummy_dataset)
@@ -81,7 +84,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # Training loop with batches
-num_epochs = 100
+num_epochs = 1
 losses = []
 
 for epoch in range(num_epochs):
@@ -89,6 +92,7 @@ for epoch in range(num_epochs):
     for batch in dummy_dataset:
         
         optimizer.zero_grad()
+        print("batch", batch)
         input_sequence = batch[:, :-1]
         target_sequence = batch[:, 1:]
 

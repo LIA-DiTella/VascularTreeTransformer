@@ -16,7 +16,7 @@ def serialize( root):
             ret[0] += str(root.data)+';'
                 
         else:
-            ret[0] += '0;'           
+            ret[0] += '99;'           
 
     ret = ['']
     post_order(root)
@@ -27,7 +27,7 @@ def deserialize(data):
         return 
     nodes = data.split(';')  
     def post_order(nodes):
-        if nodes[-1] == '0':
+        if nodes[-1] == '99':
             nodes.pop()
             return None
         node = nodes.pop()
@@ -40,18 +40,16 @@ def deserialize(data):
         return root    
     return post_order(nodes)  
 
-class TreeNode:
-    def __init__(self, data):
-        self.data = data
-        self.left = None
-        self.right = None
+
 
 def generate_random_tree(depth):
-    if depth == 0 or random.random() < 0.2:
-        return None
-    root = TreeNode(random.randint(1, 99))
+    if depth <= 1 or random.random() < 0.2:
+        return Node(random.randint(1, 98))
+    
+    root = Node(random.randint(1, 98))
     root.left = generate_random_tree(depth - 1)
     root.right = generate_random_tree(depth - 1)
+
     return root
 
 def print_tree(root, level=0, prefix="Root: "):
